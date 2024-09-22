@@ -1,13 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { createConnection } from 'typeorm'; // Assuming TypeORM for database
-import issuesRouter from './routes/issuesRoutes';
+import issueRoutes from './routes/issueRoutes';
 
 const app = express();
+const port = process.env.PORT || 3000;
+
 app.use(bodyParser.json());
+app.use('/api', issueRoutes);
 
-createConnection(); // Adjust based on your database setup
-
-app.use('/issues', issuesRouter);
-
-export default app;
+app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+});
